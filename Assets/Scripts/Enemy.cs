@@ -36,8 +36,17 @@ public class Enemy : MonoBehaviour
             {
                 Destroy(projectile.gameObject);
                 Destroy(gameObject);
+                DestroyEnemy();
                 return;
             }
+        }
+    }
+    public void DestroyEnemy()
+    {
+        PlayerStats playerStats = FindObjectOfType<PlayerStats>();
+        if (playerStats)
+        {
+            playerStats.AddScore(1);
         }
     }
 }
