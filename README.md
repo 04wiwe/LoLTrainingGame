@@ -1,2 +1,1 @@
-# SummonersTrainingGrounds
- Summoner's Training Grounds
+# Summoner's Training Grounds
