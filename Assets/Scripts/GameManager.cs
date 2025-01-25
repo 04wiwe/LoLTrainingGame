@@ -1,10 +1,12 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] private UIManager uiManager;
     public static GameManager Instance { get; private set; }
     public bool IsGameOver { get; private set; }
-    [SerializeField] private UIManager uiManager;
+
     private void Awake()
     {
         if (Instance == null)
@@ -17,12 +19,14 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
     public void GameOver()
     {
         IsGameOver = true;
         Time.timeScale = 0;
         uiManager.ShowGameOverMenu();
     }
+
     public void RestartGame()
     {
         IsGameOver = false;

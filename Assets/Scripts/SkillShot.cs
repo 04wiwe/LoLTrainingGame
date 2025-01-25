@@ -1,4 +1,5 @@
 using UnityEngine;
+
 public class SkillShot : MonoBehaviour
 {
     public GameObject projectilePrefab;
@@ -6,27 +7,27 @@ public class SkillShot : MonoBehaviour
     public float projectileSpeed = 10f;
     public Camera mainCamera;
     public float cooldownTime = 0.5f;
-    private float _cooldown = 0f;
-    void Update()
+    private float _cooldown;
+
+    private void Update()
     {
         _cooldown += Time.deltaTime;
         if (Input.GetKeyDown(KeyCode.Q))
-        {
             if (_cooldown >= cooldownTime)
             {
-                Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-                if (Physics.Raycast(ray, out RaycastHit hit))
+                var ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+                if (Physics.Raycast(ray, out var hit))
                 {
-                    Vector3 clickPoint = hit.point;
-                    Vector3 playerPosition = transform.position;
+                    var clickPoint = hit.point;
+                    var playerPosition = transform.position;
                     clickPoint.y = playerPosition.y;
-                    Vector3 direction = (clickPoint - playerPosition).normalized;
-                    Vector3 spawnPosition = playerPosition + direction * spawnOffset;
-                    GameObject projectile = Instantiate(projectilePrefab, spawnPosition, Quaternion.identity);
+                    var direction = (clickPoint - playerPosition).normalized;
+                    var spawnPosition = playerPosition + direction * spawnOffset;
+                    var projectile = Instantiate(projectilePrefab, spawnPosition, Quaternion.identity);
                     projectile.GetComponent<Projectile>().Initialize(direction, projectileSpeed);
                 }
+
                 _cooldown = 0f;
             }
-        }
     }
 }
